@@ -9,12 +9,12 @@ exclude.append("coreml")
 #endif
 
 let package = Package(
-    name: "SwiftWhisper",
+    name: "transcribewhisper",
     products: [
-        .library(name: "SwiftWhisper", targets: ["SwiftWhisper"])
+        .library(name: "transcribewhisper", targets: ["transcribewhisper"])
     ],
     targets: [
-        .target(name: "SwiftWhisper", dependencies: [.target(name: "whisper_cpp")]),
+        .target(name: "transcribewhisper", dependencies: [.target(name: "whisper_cpp")]),
         .target(name: "whisper_cpp",
                 exclude: exclude,
                 cSettings: [
@@ -22,7 +22,7 @@ let package = Package(
                     .define("WHISPER_USE_COREML", .when(platforms: [.macOS, .macCatalyst, .iOS])),
                     .define("WHISPER_COREML_ALLOW_FALLBACK", .when(platforms: [.macOS, .macCatalyst, .iOS]))
                 ]),
-        .testTarget(name: "WhisperTests", dependencies: [.target(name: "SwiftWhisper")], resources: [.copy("TestResources/")])
+        .testTarget(name: "WhisperTests", dependencies: [.target(name: "transcribewhisper")], resources: [.copy("TestResources/")])
     ],
     cxxLanguageStandard: CXXLanguageStandard.cxx11
 )
